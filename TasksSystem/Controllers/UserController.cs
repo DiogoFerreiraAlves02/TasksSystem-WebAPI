@@ -6,41 +6,41 @@ using TasksSystem.Repos.Interfaces;
 namespace TasksSystem.Controllers {
     [Route("api/[controller]")]
     [ApiController]
-    public class TaskController : ControllerBase {
-        private readonly ITaskRepos _taskRepos;
+    public class UserController : ControllerBase {
+        private readonly IUserRepos _userRepos;
 
-        public TaskController(ITaskRepos taskRepos) {
-            _taskRepos=taskRepos;
+        public UserController(IUserRepos userRepos) {
+            _userRepos=userRepos;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Models.Task>>> GetAllTasks(){
-            List<Models.Task> tasks = await _taskRepos.GetAllTasks();
-            return Ok(tasks);
+        public async Task<ActionResult<List<User>>> GetAllUsers() {
+            List<User> users = await _userRepos.GetAllUsers();
+            return Ok(users);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Models.Task>> GetById(int id) {
-            Models.Task task = await _taskRepos.GetById(id);
-            return Ok(task);
+        public async Task<ActionResult<User>> GetById(int id) {
+            User user = await _userRepos.GetById(id);
+            return Ok(user);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Models.Task>> Add([FromBody] Models.Task taskModel) {
-            Models.Task task = await _taskRepos.Add(taskModel);
-            return Ok(task);
+        public async Task<ActionResult<User>> Add([FromBody] User userModel) {
+            User user = await _userRepos.Add(userModel);
+            return Ok(user);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Models.Task>> Update([FromBody] Models.Task taskModel, int id) {
-            taskModel.Id = id;
-            Models.Task task = await _taskRepos.Update(taskModel, id);
-            return Ok(task);
+        public async Task<ActionResult<User>> Update([FromBody] User userModel, int id) {
+            userModel.Id = id;
+            User user = await _userRepos.Update(userModel, id);
+            return Ok(user);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Models.Task>> Delete(int id) {
-            bool deleted = await _taskRepos.Delete(id);
+        public async Task<ActionResult<User>> Delete(int id) {
+            bool deleted = await _userRepos.Delete(id);
             return Ok(deleted);
         }
 
